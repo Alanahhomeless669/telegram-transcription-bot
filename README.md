@@ -1,5 +1,10 @@
 # Telegram Transcription Bot
 
+![Python](https://img.shields.io/badge/python-3.12%2B-blue)
+![License: MIT](https://img.shields.io/badge/license-MIT-green)
+![Docker](https://img.shields.io/badge/docker-supported-blue)
+![Telegram](https://img.shields.io/badge/telegram-bot-blue)
+
 Telegram Transcription Bot is a private Telegram bot for turning voice messages and media into searchable text. It transcribes Telegram voice, audio, video, and document media, supports selected media URLs, and uses local `faster-whisper` transcription instead of a transcription API.
 
 Access is limited to configured Telegram User IDs. Optional AI summaries can be enabled separately with OpenAI settings.
